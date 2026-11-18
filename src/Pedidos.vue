@@ -12,7 +12,7 @@ async function entrar() {
     body: JSON.stringify({ email: email.value, password: password.value })
   })
   const json = await res.json()
-  localStorage.setItem('token', json.token)  // VULNERABLE a propósito
+  localStorage.setItem('token', json.token) // VULNERABLE a propósito
   cargar()
 }
 
@@ -24,7 +24,7 @@ async function cargar() {
 }
 
 function salir() {
-  localStorage.removeItem('token')  // VULNERABLE: no revoca el token en el servidor
+  localStorage.removeItem('token') // VULNERABLE: no revoca el token en el servidor
   pedidos.value = []
 }
 </script>
