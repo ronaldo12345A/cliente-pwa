@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { Network } from '@capacitor/network'
 import { Camera, CameraResultType } from '@capacitor/camera'
+import Pedidos from './Pedidos.vue'
 
 const API = import.meta.env.VITE_API_URL
 const items = ref([])
@@ -46,7 +47,7 @@ onMounted(async () => {
       Sin conexión. Se muestran los últimos datos guardados.
     </p>
 
-    <!-- AQUÍ ESTÁ EL BOTÓN DE LA CÁMARA -->
+    <!-- Botón de la cámara -->
     <button @click="tomarFoto" style="margin-bottom: 10px; padding: 6px 12px; cursor: pointer;">Tomar foto</button>
     
     <!-- Vista previa de la foto tomada -->
@@ -54,6 +55,15 @@ onMounted(async () => {
       <img :src="foto" width="240" alt="Foto tomada" />
     </div>
 
+    <hr style="margin: 20px 0;" />
+    
+    <!-- SECCIÓN DE PEDIDOS (LABORATORIO DE SEGURIDAD XSS) -->
+    <h2>Sección de Pedidos (Seguridad)</h2>
+    <Pedidos />
+
+    <hr style="margin: 20px 0;" />
+
+    <!-- Listado original de alumnos -->
     <p v-if="estado">{{ estado }}</p>
     <ul>
       <li v-for="item in items" :key="item.id">
