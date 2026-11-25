@@ -20,15 +20,21 @@ export default defineConfig({
         ]
       },
       workbox: {
-        runtimeCaching: [{
-          urlPattern: ({ url }) => url.pathname.startsWith('/api/'),
-          handler: 'NetworkFirst',
-          options: {
-            cacheName: 'api-cache',
-            networkTimeoutSeconds: 3,
-            expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 }
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith('/api/pedidos'),
+            handler: 'NetworkOnly' // datos privados: nunca a la caché
+          },
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith('/api/'),
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'api-cache',
+              networkTimeoutSeconds: 3,
+              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 }
+            }
           }
-        }]
+        ]
       }
     })
   ]
